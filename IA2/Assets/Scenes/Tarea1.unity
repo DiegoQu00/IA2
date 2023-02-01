@@ -270,14 +270,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63617219e70a8042a54d72f0326062f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circle1: {fileID: 251201349}
-  point1: {fileID: 923469283}
+  GO_circle1: {fileID: 251201349}
+  GO_point1: {fileID: 923469283}
   s_circle1: {fileID: 251201353}
   myRigidbody: {fileID: 794070615}
-  theta: 0.7853982
-  fMaxSpeed: 4
-  fMaxForce: 6
-  displaceRange: 0.3
+  f_theta: 1.5707964
+  f_MaxSpeed: 4
+  f_MaxForce: 6
+  f_displaceRange: 0.2
 --- !u!212 &794070613
 SpriteRenderer:
   m_ObjectHideFlags: 0
