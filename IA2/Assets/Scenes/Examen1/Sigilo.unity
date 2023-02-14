@@ -222,10 +222,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a3547afd29e20b4193432adbf8eb360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myRigidbody: {fileID: 0}
-  objRigidbody: {fileID: 1292885308}
-  t_player: {fileID: 1292885307}
-  t_head: {fileID: 587308420}
+  r_myRigidbody: {fileID: 0}
+  r_objRigidbody: {fileID: 1292885308}
+  t_infiltrator: {fileID: 1292885307}
+  t_guard: {fileID: 587308420}
   f_visionAngleBar: 30
   f_visionAngle: 51.2
   f_visionDistance: 4
@@ -234,14 +234,12 @@ MonoBehaviour:
   f_rotateTime: 0
   f_alertTime: 0
   f_atackTime: 0
-  fMaxSpeed: 4
-  fArriveRadius: 2
-  fMaxForce: 6
-  fPredictionsSteps: 2
-  TargetPosition: {x: 0, y: 0, z: 0}
+  f_MaxSpeed: 4
+  f_ArriveRadius: 2
+  f_MaxForce: 6
+  f_PredictionsSteps: 2
+  v3_TargetPosition: {x: 0, y: 0, z: 0}
   currentTarget: 0
-  b_atackState: 0
-  bUseArrive: 0
 --- !u!54 &587308422
 Rigidbody:
   m_ObjectHideFlags: 0

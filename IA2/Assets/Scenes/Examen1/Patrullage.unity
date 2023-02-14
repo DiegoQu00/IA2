@@ -239,17 +239,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1d46242d4761542a25fc6bc1e4acf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goObjective: {fileID: 0}
-  rbPlayer: {fileID: 0}
-  goWaypoint: {fileID: 2981605712392792091, guid: 0c5f1ff0ad5d20d4cabaf7f64ac2494a, type: 3}
+  go_Waypoint: {fileID: 2981605712392792091, guid: 0c5f1ff0ad5d20d4cabaf7f64ac2494a, type: 3}
   myRigidbody: {fileID: 0}
-  fMaxSpeed: 4
-  fArriveRadius: 2
-  fMaxForce: 6
-  iTargetWaypoint: 0
-  ilength: 0
-  TargetPosition: {x: 0, y: 0, z: 0}
-  Waypoints: []
+  f_MaxSpeed: 4
+  f_ArriveRadius: 2
+  f_MaxForce: 6
+  i_TargetWaypoint: 0
+  i_length: 0
+  v3_TargetPosition: {x: 0, y: 0, z: 0}
+  l_Waypoints: []
   currentTarget: 0
 --- !u!54 &1318661367
 Rigidbody:
