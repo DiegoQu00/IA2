@@ -1,0 +1,17 @@
+AVANCE:
+Se trabajo el seleccionado del AStarAgent, el seleccionado del punto inicial,
+y el seleccionado del punto final, para en base a esto darle el movimiento al 
+Agente.
+
+DUDAS:
+
+- Punto d) Si se selecciona el nodo inicio para
+pathfinding como el nodo fin para pathfinding (o viceversa), se debe
+sobrescribir y ser el nuevo nodo fin/inicio, respectivamente.
+ 
+	No lo entendimos y queriamos aclaraciones sobre que se tiene que hacer
+
+- Error en codigo al darle los puntos guardados, nos genera mal la ruta. 
+	(Implementar punto f) Nota) * Posible Respuesta *
+
+
