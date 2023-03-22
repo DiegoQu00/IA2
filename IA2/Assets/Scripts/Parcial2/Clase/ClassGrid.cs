@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
 public class Edge
 {
     public Node A;
@@ -241,7 +242,13 @@ public class ClassGrid
             iCounter++;
             debugTextArray[n.y, n.x].text = n.ToString() +
                  Environment.NewLine + "Step: " + iCounter.ToString();
+
+            debugTextArray[n.y, n.x].color = Color.red;
+
+
         }
+
+        
     }
     public static TextMesh CreateWorldText(int x, int y, string in_text,  Transform in_parent = null,
         Vector3 in_localPosition = default, int in_iFontSize = 32, Color in_color = default,
@@ -556,13 +563,13 @@ public class ClassGrid
 
     public List<Node> AStarSearch(int in_startX, int in_startY, int in_endX, int in_endY)
     {
-
         Node StartNode = GetNode(in_startX, in_startY);
         Node EndNode = GetNode(in_endX, in_endY);
 
         if (StartNode == null || EndNode == null)
         {
-            Debug.LogError("Invalid coordinates in BestFirstSearch");
+            // Mensaje de error.
+            Debug.LogError("Invalid end or start node in BestFirstSearch");
             return null;
         }
 
@@ -571,30 +578,30 @@ public class ClassGrid
 
         StartNode.g_Cost = 0;
         OpenList.Add(StartNode);
+        
 
         while (OpenList.Count > 0)
         {
-            //Mientras haya nodos en la lista abierta, vamos a buscar un camino
-            //Obtenemos el primer nodo de la lista abierta
+            // Mientras haya nodos en la lista abierta, vamos a buscar un camino.
+            // Obtenemos el primer nodo de la Lista Abierta
             Node currentNode = OpenList.Dequeue();
             Debug.Log("Current Node is: " + currentNode.x + ", " + currentNode.y);
+            
 
-            //Checamos si llegamos al destino
-            //Por motivos didáctivos sí lo vamos a terminar al llegar al nodo objetivo
+            // Checamos si ya llegamos al destino.
+            // Por motivos didácticos sí lo vamos a terminar al llegar al nodo objetivo.
             if (currentNode == EndNode)
             {
-                //Encontramos un camino.
+                // Encontramos un camino.
                 Debug.Log("Camino encontrado");
-
-                //Necesitamos construir ese camino. Para eso hacemos backtracking
+                // Necesitamos construir ese camino. Para eso hacemos backtracking.
                 List<Node> path = Backtrack(currentNode);
                 EnumeratePath(path);
-
                 return path;
             }
 
-            //Checamos si ya está en la lista cerrada
-            //NOTA: Aquí VOLVEREMOS DESPUÉS 27 de febrero 2023
+            // Checamos si ya está en la lista cerrada
+            // NOTA: Aquí VOLVEREMOS DESPUÉS 27 de febrero 2023
             if (ClosedList.Contains(currentNode))
             {
                 continue;
@@ -602,34 +609,32 @@ public class ClassGrid
 
             ClosedList.Add(currentNode);
 
-            //Vamos a visitar a todos sus vecinos
+            // Vamos a visitar a todos sus vecinos.
             List<Node> currentNeighbors = GetNeighbors(currentNode);
-
             foreach (Node neighbor in currentNeighbors)
             {
                 if (ClosedList.Contains(neighbor))
-                    continue; //podríamos cambiar esto de ser necesario
+                    continue;  // podríamos cambiar esto de ser necesario.
 
 
                 float fCostoTentativo = neighbor.fTerrainCost + currentNode.g_Cost;
 
-                //Si no lo contiene, entonces lo agregamos a la lista Abierta
-                //Si ya están en la lista abierta, hay que dejar solo la versión de 
-                //ese nodo con el menor costo
+                // Si no lo contiene, entonces lo agregamos a la lista Abierta
+                // Si ya está en la lista abierta, hay que dejar solo la versión de ese nodo con el 
+                // menor costo.
                 if (OpenList.Contains(neighbor))
                 {
-                    //Checamos si este neighbor tiene un costo MENOR que el que ya está en la lista abierta
+                    // Checamos si este neighbor tiene un costo MENOR que el que ya está en la lista abierta
                     if (fCostoTentativo < neighbor.g_Cost)
                     {
-                        //Entonces lo tenemos que reemplazar en la lista abierta
+                        // Entonces lo tenemos que remplazar en la lista abierta.
                         OpenList.Remove(neighbor);
                     }
                     else
                     {
-                        continue; //Vete al nodo vecino que siga
+                        continue;
                     }
                 }
-
 
                 neighbor.Parent = currentNode;
                 neighbor.g_Cost = fCostoTentativo;
@@ -640,12 +645,28 @@ public class ClassGrid
 
             foreach (Node n in OpenList.Nodes)
                 Debug.Log("n Node is: " + n.x + ", " + n.y + ", value= " + n.f_Cost);
+
         }
 
         Debug.LogError("No path found between start and end.");
-
         return null;
     }
+
+    public void Costs(List<Node> in_path)
+    {
+
+        foreach (Node n in in_path)
+        {
+            
+            debugTextArray[n.y, n.x].color = Color.red;
+
+
+        }
+
+
+    }
+
+    
 
 
 

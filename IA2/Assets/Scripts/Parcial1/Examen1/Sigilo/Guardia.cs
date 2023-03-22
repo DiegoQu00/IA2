@@ -24,10 +24,10 @@ public class Guardia : MonoBehaviour
 
     // Variables tipo componentes que se usaran en el script. 
     [Header("Components")]
-    public Rigidbody r_myRigidbody;
-    public Rigidbody r_objRigidbody;
-    public Transform t_infiltrator;
-    public Transform t_guard;
+    public Rigidbody r_myRigidbody = null;
+    public Rigidbody r_objRigidbody = null;
+    public Transform t_infiltrator = null;
+    public Transform t_guard = null;
     private SpriteRenderer color;
 
     // Variables necesarias para la rotacion del guardia 
@@ -64,7 +64,7 @@ public class Guardia : MonoBehaviour
     private bool b_detected = false;
     private bool b_alertState;
     private bool b_atackState;
-    private bool b_UseArrive;
+    public bool b_UseArrive;
 
     
 
@@ -210,7 +210,7 @@ public class Guardia : MonoBehaviour
     }
 
     // Funcion de movimiento Arrive, se mueve hacia un punto objetivo. Nos devuelve la SteeringForce necesaria para el movimiento, de acuerdo a el objetivo deseado.
-    Vector3 Arrive(Vector3 in_v3v3_TargetPosition)
+    public Vector3 Arrive(Vector3 in_v3v3_TargetPosition)
     {
 
         Vector3 v3Diff = in_v3v3_TargetPosition - transform.position;

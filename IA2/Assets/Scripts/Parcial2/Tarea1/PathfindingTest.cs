@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
+using UnityEngine.SceneManagement;
 
 public class PathfindingTest : MonoBehaviour
 {
     [Header("Grid")]
     public int Height=5;
     public int Width=5;
+    public float fTileSize = 10.0f;
 
     [Header("StartPoints&EndPoints")]
     public int Initx=0;
@@ -26,13 +28,15 @@ public class PathfindingTest : MonoBehaviour
     public bool b_InitialPoint = false;
     public bool b_EndPoint = false;
     public bool b_Ready = false;
-    ClassGrid myTest;
+    public ClassGrid myTest;
+    public List<Node> Pathfinding_result;
+    public bool b_PathR = false;
 
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-         myTest = new ClassGrid(Height, Width);
+         myTest = new ClassGrid(Height, Width, fTileSize);
         //myTest.DepthFirstSearch(0, 0, 4, 4);
 
         //ClassGrid myTest = new ClassGrid(5, 5);
@@ -54,20 +58,32 @@ public class PathfindingTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            position.z = 0f;
+        }
+
         if (b_InitialPoint == true && b_EndPoint == true)
             b_Ready = true;
 
-        if (b_Ready == true)
+        if (b_Ready == true && Input.GetKeyDown("space"))
         {
             GridTile s_InitialPoint = go_InitialPoint.GetComponent<GridTile>();
             GridTile s_EndPoint = go_EndPoint.GetComponent<GridTile>();
-            List<Node> Pathfinding_result = myTest.AStarSearch(s_InitialPoint.i_x, s_InitialPoint.i_y, s_EndPoint.i_x, s_EndPoint.i_y);
+            Pathfinding_result = myTest.AStarSearch(s_InitialPoint.i_x, s_InitialPoint.i_y, s_EndPoint.i_x, s_EndPoint.i_y);
             List<Vector3> WorldPositionPathfinding = new List<Vector3>();
 
             foreach (Node n in Pathfinding_result)
             {
                 WorldPositionPathfinding.Add(myTest.GetWorldPosition(n.x, n.y));
             }
+            b_PathR = true;
         }
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(0);
     }
 }
