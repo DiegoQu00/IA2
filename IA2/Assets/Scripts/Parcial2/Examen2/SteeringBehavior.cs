@@ -1,3 +1,11 @@
+//
+// Diego Quintero Martinez --- IAVideojuegos --- UCQ --- Examen2 --- IDVMI 
+//
+// Clase SteeringBehavior
+//
+// Clase que contiene todos los SteeringBehaviors, para poder aplicarlos a cualquier
+// agente.
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

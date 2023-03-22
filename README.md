@@ -32,4 +32,5 @@
 #### ~ Espacio para iniciar el pathfinding, ya que se haya seleccionado a los nodos de inicio y final.
 #### ~ El boton de arriba a la derecha reiniciara, para poder probar de nuevo el algoritmo.
 #### ~ El agente solo se movera al estar seleccionado. 
+### La escena dedicada al examen esta en Assets/Scenes/Parcial2/ y se llama Examen_2do_Parcial
 
