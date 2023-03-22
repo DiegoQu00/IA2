@@ -11,9 +11,11 @@ public class GridTile : MonoBehaviour
     public int i_y;
     public bool b_initPoint;
     public bool b_endPoint;
+    public TextMesh text;
     void Start()
     {
         PathFinding = FindObjectOfType<PathfindingTest>();
+        text = GetComponent<TextMesh>();
     }
 
     // Update is called once per frame

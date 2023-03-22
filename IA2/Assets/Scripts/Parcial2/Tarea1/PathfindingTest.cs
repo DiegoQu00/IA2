@@ -78,9 +78,14 @@ public class PathfindingTest : MonoBehaviour
             {
                 WorldPositionPathfinding.Add(myTest.GetWorldPosition(n.x, n.y));
             }
+
+            
             b_PathR = true;
         }
+
+        
     }
+
 
     public void RestartScene()
     {

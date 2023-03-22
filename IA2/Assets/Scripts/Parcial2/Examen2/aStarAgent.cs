@@ -60,10 +60,14 @@ public class aStarAgent : SteeringBehavior
             //Clamp es para que no exceda la velocidad máxima
             r_myRigidbody.velocity = Vector3.ClampMagnitude(r_myRigidbody.velocity, f_MaxSpeed);
 
+
+            
+
         }
     }
-
     
+
+
     private void OnMouseOver()
     {
 

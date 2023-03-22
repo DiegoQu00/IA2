@@ -63,6 +63,8 @@ public class ClassGrid
     public bool bShowDebug = true;
     public GameObject debugGO = null;
 
+    
+
     public ClassGrid(int in_height, int in_width,float in_fTileSize = 10.0f, Vector3 in_v3OriginPosition= default)
     {
         iHeight = in_height;
@@ -241,17 +243,27 @@ public class ClassGrid
         {
             iCounter++;
             debugTextArray[n.y, n.x].text = n.ToString() +
-                 Environment.NewLine + "Step: " + iCounter.ToString();
-
+                 Environment.NewLine + "Step: " + iCounter.ToString() +
+                 Environment.NewLine + "gCost: " + n.g_Cost.ToString() +
+                  Environment.NewLine + "hCost: " + n.h_Cost.ToString() +
+                   Environment.NewLine + "hCost: " + n.f_Cost.ToString(); 
             debugTextArray[n.y, n.x].color = Color.red;
+            debugTextArray[n.y, n.x].fontSize = 15;
 
 
         }
+ 
+    }
 
-        
+    public void ChangeColor(List<Node> in_path)
+    {
+        foreach (Node n in in_path)
+        {
+            debugTextArray[n.y, n.x].color = Color.blue;
+        }
     }
     public static TextMesh CreateWorldText(int x, int y, string in_text,  Transform in_parent = null,
-        Vector3 in_localPosition = default, int in_iFontSize = 32, Color in_color = default,
+        Vector3 in_localPosition = default, int in_iFontSize = 15, Color in_color = default,
         TextAnchor in_textAnchor = TextAnchor.UpperLeft, TextAlignment in_textAlignment = TextAlignment.Left)
     {
         if (in_color == null)
@@ -268,6 +280,7 @@ public class ClassGrid
         Script.GetIndex(x, y);
         MyObject.transform.parent = in_parent;
         MyObject.transform.localPosition = in_localPosition;
+        MyObject.tag = "Tile";
 
         TextMesh myTM = MyObject.GetComponent<TextMesh>();
         myTM.text = in_text;
@@ -563,8 +576,11 @@ public class ClassGrid
 
     public List<Node> AStarSearch(int in_startX, int in_startY, int in_endX, int in_endY)
     {
+        
         Node StartNode = GetNode(in_startX, in_startY);
         Node EndNode = GetNode(in_endX, in_endY);
+
+        
 
         if (StartNode == null || EndNode == null)
         {
@@ -596,7 +612,10 @@ public class ClassGrid
                 Debug.Log("Camino encontrado");
                 // Necesitamos construir ese camino. Para eso hacemos backtracking.
                 List<Node> path = Backtrack(currentNode);
+                
                 EnumeratePath(path);
+                ChangeColor(ClosedList);
+
                 return path;
             }
 
@@ -644,7 +663,16 @@ public class ClassGrid
             }
 
             foreach (Node n in OpenList.Nodes)
+            {
                 Debug.Log("n Node is: " + n.x + ", " + n.y + ", value= " + n.f_Cost);
+                debugTextArray[n.y, n.x].color = Color.green;
+                debugTextArray[n.y, n.x].fontSize = 15;
+                debugTextArray[n.y, n.x].text = n.ToString() +
+                 Environment.NewLine + "gCost: " + n.g_Cost.ToString() + 
+                  Environment.NewLine + "hCost: " + n.h_Cost.ToString() +
+                   Environment.NewLine+ "hCost: " + n.f_Cost.ToString();
+            }
+                
 
         }
 
@@ -652,19 +680,7 @@ public class ClassGrid
         return null;
     }
 
-    public void Costs(List<Node> in_path)
-    {
-
-        foreach (Node n in in_path)
-        {
-            
-            debugTextArray[n.y, n.x].color = Color.red;
-
-
-        }
-
-
-    }
+   
 
     
 
