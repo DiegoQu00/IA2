@@ -1,3 +1,11 @@
+//
+// Diego Quintero Martinez --- IAVideojuegos --- UCQ --- Examen2 --- IDVMI 
+//
+// Clase aStarAgent
+//
+// Clase encargada de controlar al Agente. Hereda de Steering Behavior para su movimiento.
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,17 +13,20 @@ using Unity.Mathematics;
 
 public class aStarAgent : SteeringBehavior
 {
-    // Start is called before the first frame update
+    // Booleana para revisar si esta seleccionado o no.
     public bool Selected = false;
+    // Color del agente, informacion visual. 
     private SpriteRenderer color;
 
+    // Lista para el camino a seguir.
     public List<Vector3> Path = null;
+    // Nodo actual.
     int i_currentWaypoint = 0;
 
     public PathfindingTest Pathfinding;
     ClassGrid s_Grid;
 
-    public float f_NearArea;
+    public float f_NearArea = .5f;
 
     void Start()
     {
@@ -26,6 +37,7 @@ public class aStarAgent : SteeringBehavior
     // Update is called once per frame
     void Update()
     {
+        // Si los puntos de inicio y final estan listos, conseguir el camino.
         if(Pathfinding.b_PathR == true)
         {
             Path = s_Grid.ConvertBacktrackToWorldPos(Pathfinding.Pathfinding_result);
@@ -52,6 +64,7 @@ public class aStarAgent : SteeringBehavior
                 i_currentWaypoint = math.min(i_currentWaypoint, Path.Count - 1);
             }
 
+            // Reestructuracion de la condicion
             v3SteeringForce = i_currentWaypoint == Path.Count - 1 ? Seek(Path[i_currentWaypoint]) : Arrive(Path[i_currentWaypoint]);
 
 
@@ -67,10 +80,10 @@ public class aStarAgent : SteeringBehavior
     }
     
 
-
+    // Detecta si el mouse esta sobre el objeto
     private void OnMouseOver()
     {
-
+        // Seleccionar agente
         if (Input.GetMouseButtonDown(0))
         {
             Selected = true;
@@ -78,7 +91,7 @@ public class aStarAgent : SteeringBehavior
             color.color = Color.cyan;
             r_myRigidbody.isKinematic = false;
         }
-
+        // Deseleccionar agente
         if (Input.GetMouseButtonDown(1))
         {
             Selected = false;
@@ -89,8 +102,5 @@ public class aStarAgent : SteeringBehavior
 
 
     }
-
-
-
 
     }

@@ -1,3 +1,10 @@
+//
+// Diego Quintero Martinez --- IAVideojuegos --- UCQ --- Examen2 --- IDVMI 
+//
+// Clase PathfindingTest
+//
+// Clase encargada de inicializar el Grid y  pathfinding en escena.
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +25,6 @@ public class PathfindingTest : MonoBehaviour
     public int Endy=4;
 
     public Transform t;
-    //public Transform t;
 
     public int2 StartPosition = int2.zero;
     public int2 EndPosition = int2.zero;
@@ -33,10 +39,12 @@ public class PathfindingTest : MonoBehaviour
     public bool b_PathR = false;
 
 
-    // Start is called before the first frame update
+
     private void Awake()
     {
+        // Creacion de Grid
          myTest = new ClassGrid(Height, Width, fTileSize);
+
         //myTest.DepthFirstSearch(0, 0, 4, 4);
 
         //ClassGrid myTest = new ClassGrid(5, 5);
@@ -64,9 +72,11 @@ public class PathfindingTest : MonoBehaviour
             position.z = 0f;
         }
 
+        // Booleana que nos avisa si ya se seleccionaron los 2 puntos.
         if (b_InitialPoint == true && b_EndPoint == true)
             b_Ready = true;
 
+        // Inicio de pathfinding con espacio
         if (b_Ready == true && Input.GetKeyDown("space"))
         {
             GridTile s_InitialPoint = go_InitialPoint.GetComponent<GridTile>();
@@ -79,14 +89,14 @@ public class PathfindingTest : MonoBehaviour
                 WorldPositionPathfinding.Add(myTest.GetWorldPosition(n.x, n.y));
             }
 
-            
+            // Pathfinding listo.
             b_PathR = true;
         }
 
         
     }
 
-
+    // Reiniciar escena
     public void RestartScene()
     {
         SceneManager.LoadScene(0);

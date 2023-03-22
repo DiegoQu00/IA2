@@ -23,3 +23,13 @@
 ## Tarea 1P2 : BreadthFirstSearch 
 ### Para probar el comportamiento se tiene que abrir la escena "Pathfinding" que esta en: Assets/Scenes/Parcial2/Pathfinding. Desde el objeto grid que esta en escena se puede modificar los puntos de inicio y finales, aunque por defecto deberian de estar en los requeridos por la tarea. 
 ### Los scripts necesarios para esta tarea se encuentran en: Assets/Scripts/Parcial2/Tarea1/. 
+##
+## Examen 2 
+#### Se genera una grid, por el cual usaremos algoritmo de Pathfinding y un agente AStar para recorrer de nodo de inicio a final con la mejor ruta, ademas de que se mostrara informacion visual como la ruta, la lista abierta, la lista cerrada y sus costos.
+#### ~ Click Derecho sobre el agente para seleccionarlo.
+#### ~ Click Izquierdo sobre cualquier nodo para seleccionarlo como nodo inicial.
+#### ~ Click Derecho sobre cualquier nodo para seleccionarlo como nodo final.
+#### ~ Espacio para iniciar el pathfinding, ya que se haya seleccionado a los nodos de inicio y final.
+#### ~ El boton de arriba a la derecha reiniciara, para poder probar de nuevo el algoritmo.
+#### ~ El agente solo se movera al estar seleccionado. 
+
