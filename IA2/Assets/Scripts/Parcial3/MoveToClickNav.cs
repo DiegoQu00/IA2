@@ -33,8 +33,9 @@ public class MoveToClickNav : MonoBehaviour
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit,
                 100.0f, floorMask))
             {
-                // Le decimos que vaya al punto en el piso que chocó con el rayo de la cámara.
+                // Animacion de correr.
                 animator.SetBool("IsRunning", true);
+                // Le decimos que vaya al punto en el piso que chocó con el rayo de la cámara.
                 _agent.destination = hit.point;
 
             }
@@ -44,6 +45,7 @@ public class MoveToClickNav : MonoBehaviour
         float dist = (hit.point - transform.position).magnitude;
         if (dist <= .2f)
         {
+            // Desactivar animacion de correr.
             animator.SetBool("IsRunning", false);
         }
 

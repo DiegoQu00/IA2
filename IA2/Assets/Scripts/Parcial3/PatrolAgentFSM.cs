@@ -25,8 +25,11 @@ public class PatrolAgentFSM : StateMachine
     // debe regresar en el estado de Alert para volver al estado de Patrol.
     public Vector3 v3AgentPatrollingPosition;
 
+    // Referencia al Animator del Guardia
     public Animator animator;
+    // Referencia al Animator del Infiltrador
     public Animator InfAnimator;
+    // Referencia a la luz del Guardia
     public Light lt;
 
     // Cono de visión.
@@ -40,8 +43,9 @@ public class PatrolAgentFSM : StateMachine
     // Hacia dónde está viendo el agente Patrullero.
     // public Vector3 v3AgentFacingDirection;  // _sm.transform.forward
 
-    // Una 
+    // Posicion del Infiltrador
     public Transform v3TargetTransform;
+    // Ultima vez visto.
     public Vector3 v3LastKnownTargetPos;
     
 
@@ -103,6 +107,7 @@ public class PatrolAgentFSM : StateMachine
 
     public bool CheckFieldOfVision(float in_fVisionDist, float in_fVisionAngle, out Vector3 v3TargetPos)
     {
+        //Ajustar el angulo y distancia de la luz, a la misma que el rango de vision.
         lt.spotAngle = fVisionAngle;
         lt.range = fVisionDist;
         v3TargetPos = Vector3.zero;

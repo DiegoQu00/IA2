@@ -34,4 +34,11 @@
 #### ~ El agente solo se movera al estar seleccionado. 
 ### La escena dedicada al examen esta en Assets/Scenes/Parcial2/ y se llama Examen_2do_Parcial
 ### Equipo con : Erick Aaron Hernandez Ibarra
+##
+## Examen 3 
+#### Se agrego el StateMachine en el ejercicio del guardia e infiltrador, se aplico la logica a 3D y se agregaron tanto animaciones como ambientacion.
+#### ~ Click Izquierdo sobre el suelo para que el personaje camine hacia el lugar.
+#### ~ El Guardia cuenta con 3 estados: Patrol, Alert y Atack. Indicados por el color verde, amarillo y rojo, respectivamente en la luz del guardia. 
+### La escena dedicada al examen esta en Assets/Scenes/Parcial3/ y se llama Examen3.
+### Equipo con : Erick Aaron Hernandez Ibarra y Javier Alfredo Gonzales Rubio
 

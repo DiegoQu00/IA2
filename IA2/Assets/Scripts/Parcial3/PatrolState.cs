@@ -58,8 +58,11 @@ public class PatrolState : BaseState
         // Por ejemplo, aquí podrían poner el Trigger de su animator a "SetTrigger("OnPatrol")"
         RotateCoroutineRef = _sm.StartCoroutine(this.Rotate());
         
+        // Animacion de Caminar False, para cuando vuelva a este estado, despues del alert.
         _sm.animator.SetBool("IsWalking", false);
+        // Animacion de Correr False, para cuando vuelva a este estado despues del Atack.
         _sm.animator.SetBool("IsRunning", false);
+        //Color de la luz verde.
         _sm.lt.color = Color.green;
 
     }
@@ -90,11 +93,11 @@ public class PatrolState : BaseState
 
         if (fDist <= 3f)
         {
+            // Animacion de atacar, cuando se acerque el player en estado Patrol.
             _sm.animator.SetBool("IsAtacking", true);
 
-            
+            // Girar hacia el player, ya que se acerco mucho.
             Vector3 Rotation = Vector3.RotateTowards(_sm.transform.forward, _sm.v3TargetTransform.position - _sm.transform.position  , 7 *Time.deltaTime, 0.0f);
-
             _sm.transform.rotation = Quaternion.LookRotation(Rotation);
 
 
@@ -103,6 +106,7 @@ public class PatrolState : BaseState
         }
         else
         {
+            // Si se aleja, o no esta cerca. Desactivamos la animacion de ataque.
             _sm.animator.SetBool("IsAtacking", false);
         }
 
@@ -148,6 +152,7 @@ public class AlertState : BaseState
         fTotalTimeTargetHasBeenOnFOV = 0.0f;
         fTotalTimeBeforeGoing = 0.0f;
         bCheckingLastKnownPos = AlertStep.preparingToGo;
+        //Color amarillo de la luz.
         _sm.lt.color = Color.yellow;
 
     }
@@ -164,12 +169,14 @@ public class AlertState : BaseState
 
         if (fDist <= 3f)
         {
+            // Si se acerca el player en modo de Alerta, ataca el Guardia.
             _sm.animator.SetBool("IsAtacking", true);
 
 
         }
         else
         {
+            // Si no esta cerca, no ataca.
             _sm.animator.SetBool("IsAtacking", false);
         }
 
@@ -191,6 +198,7 @@ public class AlertState : BaseState
         // Mientras no haya llegado a la última posición conocida del Infiltrador, seguir moviéndose hacia ella.
         if (bCheckingLastKnownPos == AlertStep.going)
         {
+            // Animacion de caminar.
             _sm.animator.SetBool("IsWalking", true);
             float vDist = (_sm.transform.position - _sm.v3LastKnownTargetPos).magnitude;
             // Debug.Log("Dist between _sm.transform.position - _sm.v3LastKnownTargetPos is: "  + vDist);
@@ -198,15 +206,13 @@ public class AlertState : BaseState
             {
                 // Entonces ya llegó. Tiene que dar unos vistazos, y luego regresar a 
                 // su posición de patrullaje.
-                //_sm.animator.SetBool("EndWalk", true);
                 bCheckingLastKnownPos = AlertStep.goingBack;
                 _sm.navMeshAgent.SetDestination(_sm.v3AgentPatrollingPosition);
-                //_sm.animator.SetBool("EndWalk", false);
             }
         }
         if (bCheckingLastKnownPos == AlertStep.goingBack)
         {
-            //_sm.animator.SetBool("EndWalk", false);
+            
             float vDist = (_sm.transform.position - _sm.v3AgentPatrollingPosition).magnitude;
             if (vDist <= 1.0f)
             {
@@ -266,7 +272,9 @@ public class AttackState : BaseState
         fCurrentChaseTime = 0.0f;
         bGoingBackToPatrolPos = false;
         _sm.navMeshAgent.destination = _sm.v3TargetTransform.position;
+        // Animacion de Correr.
         _sm.animator.SetBool("IsRunning", true);
+        //Cambio de color de luz.
         _sm.lt.color = Color.red;
     }
 
@@ -274,7 +282,6 @@ public class AttackState : BaseState
     {
         if (fCurrentChaseTime >= _sm.FMaxChasingTime)
         {
-            //_sm.animator.SetBool("EndWalk", true);
             // Ahora tenemos que hacer que vuelva a su posición inicial.
             _sm.navMeshAgent.destination = _sm.v3AgentPatrollingPosition;
             bGoingBackToPatrolPos = true;
@@ -309,13 +316,16 @@ public class AttackState : BaseState
         
         if (fDist <= 1.5f)
         {
+            // Si se acerca al player corriendo, Animacion de atacar
             _sm.animator.SetBool("IsAtacking", true);
+            // Intento de animacion con el Infiltrador, animacion defectuosa.
             _sm.InfAnimator.SetBool("IsDead", true);
 
 
         }
         else
         {
+            // Apagar las animaciones.
             _sm.animator.SetBool("IsAtacking", false);
             _sm.InfAnimator.SetBool("IsDead", false);
         }
@@ -334,6 +344,7 @@ public class AttackState : BaseState
         }
         else
         {
+            // Animacion de ataque falso, por cualquier fallo.
             _sm.animator.SetBool("IsAtacking", false);
             GoBackToPatrolPosition();
             
