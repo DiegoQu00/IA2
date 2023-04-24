@@ -33,4 +33,5 @@
 #### ~ El boton de arriba a la derecha reiniciara, para poder probar de nuevo el algoritmo.
 #### ~ El agente solo se movera al estar seleccionado. 
 ### La escena dedicada al examen esta en Assets/Scenes/Parcial2/ y se llama Examen_2do_Parcial
+### Equipo con : Erick Aaron Hernandez Ibarra
 
